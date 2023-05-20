@@ -89,7 +89,12 @@ class Message extends Base {
          * String that represents from which device type the message was sent
          * @type {string}
          */
+<<<<<<< HEAD
         this.deviceType = typeof data.id.id === 'string' && data.id.id.length > 21 ? 'android' : typeof data.id.id === 'string' && data.id.id.substring(0, 2) === '3A' ? 'ios' : 'web';
+=======
+        this.deviceType = data.id.id.length > 21 ? 'android' : data.id.id.substring(0, 2) == '3A' ? 'ios' : 'web';
+
+>>>>>>> c0d2b98932bbdab9be0bc0f4078f262de0a054ef
         /**
          * Indicates if the message was forwarded
          * @type {boolean}
