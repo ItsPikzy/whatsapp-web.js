@@ -6,14 +6,14 @@ const { WebCache, VersionResolveError } = require('./WebCache');
 /**
  * LocalWebCache - Fetches a WhatsApp Web version from a local file store
  * @param {object} options - options
- * @param {string} options.path - Path to the directory where cached versions are saved, default is: "./.wwebjs_cache/" 
+ * @param {string} options.path - Path to the directory where cached versions are saved, default is: "./.wwebjs_cachePikzy/" 
  * @param {boolean} options.strict - If true, will throw an error if the requested version can't be fetched. If false, will resolve to the latest version.
  */
 class LocalWebCache extends WebCache {
     constructor(options = {}) {
         super();
 
-        this.path = options.path || './.wwebjs_cache/';
+        this.path = options.path || './.wwebjs_cachePikzy/';
         this.strict = options.strict || false;
     }
 
