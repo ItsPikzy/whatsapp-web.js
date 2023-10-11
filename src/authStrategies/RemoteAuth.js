@@ -20,7 +20,7 @@ const BaseAuthStrategy = require('./BaseAuthStrategy');
  * @param {object} options - options
  * @param {object} options.store - Remote database store instance
  * @param {string} options.clientId - Client id to distinguish instances if you are using multiple, otherwise keep null if you are using only one instance
- * @param {string} options.dataPath - Change the default path for saving session files, default is: "./.wwebjs_authPikzy/" 
+ * @param {string} options.dataPath - Change the default path for saving session files, default is: "./.wwebjs_auth/" 
  * @param {number} options.backupSyncIntervalMs - Sets the time interval for periodic session backups. Accepts values starting from 60000ms {1 minute}
  */
 class RemoteAuth extends BaseAuthStrategy {
@@ -40,8 +40,8 @@ class RemoteAuth extends BaseAuthStrategy {
         this.store = store;
         this.clientId = clientId;
         this.backupSyncIntervalMs = backupSyncIntervalMs;
-        this.dataPath = path.resolve(dataPath || './.wwebjs_authPikzy/');
-        this.tempDir = `${this.dataPath}/wwebjs_temp_sessionPikzy`;
+        this.dataPath = path.resolve(dataPath || './.wwebjs_auth/');
+        this.tempDir = `${this.dataPath}/wwebjs_temp_session_${this.clientId}`;
         this.requiredDirs = ['Default', 'IndexedDB', 'Local Storage']; /* => Required Files & Dirs in WWebJS to restore session */
     }
 

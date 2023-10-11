@@ -172,8 +172,7 @@ class Client extends EventEmitter {
             }
         );
 
-        const INTRO_IMG_SELECTOR = '[data-testid="intro-md-beta-logo-dark"], [data-testid="intro-md-beta-logo-light"], [data-asset-intro-image-light="true"], [data-asset-intro-image-dark="true"],' +
-            '[data-icon="intro-md-beta-logo-dark"], [data-icon="intro-md-beta-logo-light"]';
+        const INTRO_IMG_SELECTOR = '[data-icon=\'search\']';
         const INTRO_QRCODE_SELECTOR = 'div[data-ref] canvas';
 
         // Checks which selector appears first
@@ -653,11 +652,7 @@ class Client extends EventEmitter {
             window.Store.Msg.on('change:body', (msg, newBody, prevBody) => { window.onEditMessageEvent(window.WWebJS.getMessageModel(msg), newBody, prevBody); });
             window.Store.AppState.on('change:state', (_AppState, state) => { window.onAppStateChangedEvent(state); });
             window.Store.Conn.on('change:battery', (state) => { window.onBatteryStateChangedEvent(state); });
-            try {
-                window.Store.Call.on('add', (call) => { window.onIncomingCall(call); });    
-            } catch(err){
-                console.log(err);
-            }
+            window.Store.Call.on('add', (call) => { window.onIncomingCall(call); });
             window.Store.Chat.on('remove', async (chat) => { window.onRemoveChatEvent(await window.WWebJS.getChatModel(chat)); });
             window.Store.Chat.on('change:archive', async (chat, currState, prevState) => { window.onArchiveChatEvent(await window.WWebJS.getChatModel(chat), currState, prevState); });
             window.Store.Msg.on('add', (msg) => { 
@@ -790,7 +785,7 @@ class Client extends EventEmitter {
      * Message options.
      * @typedef {Object} MessageSendOptions
      * @property {boolean} [linkPreview=true] - Show links preview. Has no effect on multi-device accounts.
-     * @property {boolean} [sendAudioAsVoice=false] - Send audio as voice message
+     * @property {boolean} [sendAudioAsVoice=false] - Send audio as voice message with a generated waveform
      * @property {boolean} [sendVideoAsGif=false] - Send video as gif
      * @property {boolean} [sendMediaAsSticker=false] - Send media as a sticker
      * @property {boolean} [sendMediaAsDocument=false] - Send media as a document
@@ -816,7 +811,7 @@ class Client extends EventEmitter {
      */
     async sendMessage(chatId, content, options = {}) {
         if (options.mentions && options.mentions.some(possiblyContact => possiblyContact instanceof Contact)) {
-            //console.warn('Mentions with an array of Contact are now deprecated. See more at https://github.com/pedroslopez/whatsapp-web.js/pull/2166.');
+            console.warn('Mentions with an array of Contact are now deprecated. See more at https://github.com/pedroslopez/whatsapp-web.js/pull/2166.');
             options.mentions = options.mentions.map(a => a.id._serialized);
         }
         let internalOptions = {

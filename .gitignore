@@ -70,7 +70,7 @@ typings/
 
 # Test sessions
 *session.json
-.wwebjs_authPikzy/
+.wwebjs_auth/
 
 # local version cache
-.wwebjs_cachePikzy/
+.wwebjs_cache/

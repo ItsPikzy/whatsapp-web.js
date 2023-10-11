@@ -8,7 +8,7 @@ const BaseAuthStrategy = require('./BaseAuthStrategy');
  * Local directory-based authentication
  * @param {object} options - options
  * @param {string} options.clientId - Client id to distinguish instances if you are using multiple, otherwise keep null if you are using only one instance
- * @param {string} options.dataPath - Change the default path for saving session files, default is: "./.wwebjs_authPikzy/" 
+ * @param {string} options.dataPath - Change the default path for saving session files, default is: "./.wwebjs_auth/" 
 */
 class LocalAuth extends BaseAuthStrategy {
     constructor({ clientId, dataPath }={}) {
@@ -19,7 +19,7 @@ class LocalAuth extends BaseAuthStrategy {
             throw new Error('Invalid clientId. Only alphanumeric characters, underscores and hyphens are allowed.');
         }
 
-        this.dataPath = path.resolve(dataPath || './.wwebjs_authPikzy/');
+        this.dataPath = path.resolve(dataPath || './.wwebjs_auth/');
         this.clientId = clientId;
     }
 
